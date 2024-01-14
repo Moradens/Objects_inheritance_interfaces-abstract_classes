@@ -18,10 +18,8 @@ abstract class Obrazec {
 
     @Override
     public String toString() {
-        return String.format("Jsem %s o stranách %.1f a %.1f, s obvodem %.1f a obsahem %.1f",
+        return String.format("Jsem %s s obvodem %.1f a obsahem %.15f",
                 this.getClass().getSimpleName(),
-                vypoctiObvod(),
-                vypoctiObsah(),
                 this.vypoctiObvod(),
                 this.vypoctiObsah());
     }
@@ -41,7 +39,7 @@ class RovnostrannyTrojuhelnik extends Obrazec {
 
     @Override
     double vypoctiObsah() {
-        return Math.sqrt(3) / 4 * strana * strana;
+        return (Math.sqrt(3) / 4) * Math.pow(strana, 2);
     }
 }
 
@@ -59,7 +57,7 @@ class Kruh extends Obrazec {
 
     @Override
     double vypoctiObsah() {
-        return Math.PI * polomer * polomer;
+        return Math.PI * Math.pow(polomer, 2);
     }
 }
 
@@ -77,26 +75,26 @@ class Ctverec extends Obrazec {
 
     @Override
     double vypoctiObsah() {
-        return strana * strana;
+        return Math.pow(strana, 2);
     }
 }
 
 class Obdelnik extends Obrazec {
-    private double delka;
-    private double sirka;
+    private double stranaA;
+    private double stranaB;
 
-    public Obdelnik(double delka, double sirka) {
-        this.delka = delka;
-        this.sirka = sirka;
+    public Obdelnik(double stranaA, double stranaB) {
+        this.stranaA = stranaA;
+        this.stranaB = stranaB;
     }
 
     @Override
     double vypoctiObvod() {
-        return 2 * (delka + sirka);
+        return 2 * (stranaA + stranaB);
     }
 
     @Override
     double vypoctiObsah() {
-        return delka * sirka;
+        return stranaA * stranaB;
     }
 }
